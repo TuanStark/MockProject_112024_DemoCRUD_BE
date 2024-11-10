@@ -6,9 +6,7 @@ import com.example.mockproject_112024_democrud_be.helper.PageResponse;
 import com.example.mockproject_112024_democrud_be.helper.response.ResponseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.mockproject_112024_democrud_be.entity.User;
 import com.example.mockproject_112024_democrud_be.service.UserService;
@@ -52,6 +50,15 @@ public class UserController {
                 .message("SUCCESS")
                 .code(200)
                 .data(response)
+                .build();
+    }
+
+    @DeleteMapping("/{userId}")
+    ResponseObject<String> deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
+        return ResponseObject.<String>builder()
+                .message("User has been deleted")
+                .code(200)
                 .build();
     }
 }
