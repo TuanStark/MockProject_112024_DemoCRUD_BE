@@ -51,4 +51,10 @@ public class UserService {
                 .data(listUser)
                 .build();
     }
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+    }
+    public List<User> getAllNoPageList() {
+        return userRepository.findAll();
+    }
 }
