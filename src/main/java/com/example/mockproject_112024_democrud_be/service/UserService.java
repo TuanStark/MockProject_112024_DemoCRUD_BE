@@ -55,4 +55,18 @@ public class UserService {
     public List<User> getAllNoPageList() {
         return userRepository.findAll();
     }
+  
+	public User update(User a) {
+		try {
+			return this.userRepository.save(a);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+    public User findById(Long id) {
+		// TODO Auto-generated method stub
+		return this.userRepository.findById(id).get();
+	}
 }
