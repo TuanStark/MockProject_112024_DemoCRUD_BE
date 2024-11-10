@@ -1,14 +1,18 @@
 package com.example.mockproject_112024_democrud_be.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import com.example.mockproject_112024_democrud_be.helper.PageResponse;
 import com.example.mockproject_112024_democrud_be.helper.response.ResponseObject;
+import com.example.mockproject_112024_democrud_be.modelDto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.mockproject_112024_democrud_be.entity.User;
 import com.example.mockproject_112024_democrud_be.service.UserService;
@@ -63,5 +67,31 @@ public class UserController {
                 .code(200)
                 .data(response)
                 .build();
+    }
+
+    @PutMapping("/{id}")
+    ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody UserDto userNew) {
+        System.out.println(userNew);
+        User userOld = this.userService.findById(id);
+        userOld.setName(userNew.getName());
+        userOld.setAddress(userNew.getAddress());
+        userOld.setEmail(userNew.getEmail());
+        userOld.setPhone(userNew.getPhone());
+       // System.out.println(userNew.getYearOfBirth());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+        try {
+            LocalDateTime date = LocalDate.parse(userNew.getYearOfBirth(), formatter).atStartOfDay();
+            System.out.println(date);
+            userOld.setYearOfBirth(date);
+        } catch (DateTimeParseException e) {
+            e.printStackTrace();
+        }
+
+        //System.out.println(userOld);
+        if (this.userService.update(userOld) != null) {
+            return new ResponseEntity<>("thành công", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("thất bại", HttpStatus.BAD_REQUEST);
+
     }
 }
