@@ -51,8 +51,4 @@ public class UserService {
                 .data(listUser)
                 .build();
     }
-
-    public List<User> getAllNoPageList() {
-        return userRepository.findAll();
-    }
 }

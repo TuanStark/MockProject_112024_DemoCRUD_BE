@@ -54,14 +54,4 @@ public class UserController {
                 .data(response)
                 .build();
     }
-
-    @GetMapping("/getAllNoPageList")
-    public ResponseObject<List<User>> getAllNoPageList() {
-        List<User> response =  userService.getAllNoPageList();
-        return ResponseObject.<List<User>>builder()
-                .message("SUCCESS")
-                .code(200)
-                .data(response)
-                .build();
-    }
 }
