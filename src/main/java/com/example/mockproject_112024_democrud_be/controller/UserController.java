@@ -19,8 +19,8 @@ import com.example.mockproject_112024_democrud_be.service.UserService;
  * DATE AUTHOR DESCRIPTION
  * -------------------------------------
  * 11/8/2024 kiet-kun-afk Create
- * 11/8/2024 kiet-kun-afk Create
- * 11/8/2024 kiet-kun-afk update
+ * 11/8/2024 kiet-kun-afk asd
+ * 11/8/2024 kiet-kun-afk sadasdsa
  */
 @RestController
 public class UserController {
