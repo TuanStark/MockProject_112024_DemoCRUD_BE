@@ -26,6 +26,7 @@ import com.example.mockproject_112024_democrud_be.service.UserService;
  * -------------------------------------
  * 11/8/2024 kiet-kun-afk Create
  * 11/8/2024 kiet-kun-afk update
+ * 11/8/2024 kiet-kun-afk update
  */
 @RestController
 public class UserController {
@@ -52,7 +53,7 @@ public class UserController {
         if (size == null) {
             size = Integer.MAX_VALUE;
         }
-        PageResponse<User> response = userService.getAllCategory(page, size,limit);
+        PageResponse<User> response = userService.getAllCategory(page, size, limit);
         return ResponseObject.<PageResponse>builder()
                 .message("SUCCESS")
                 .code(200)
@@ -62,7 +63,7 @@ public class UserController {
 
     @GetMapping("/getAllNoPageList")
     public ResponseObject<List<User>> getAllNoPageList() {
-        List<User> response =  userService.getAllNoPageList();
+        List<User> response = userService.getAllNoPageList();
         return ResponseObject.<List<User>>builder()
                 .message("SUCCESS")
                 .code(200)
@@ -78,7 +79,7 @@ public class UserController {
         userOld.setAddress(userNew.getAddress());
         userOld.setEmail(userNew.getEmail());
         userOld.setPhone(userNew.getPhone());
-       // System.out.println(userNew.getYearOfBirth());
+        // System.out.println(userNew.getYearOfBirth());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         try {
             LocalDateTime date = LocalDate.parse(userNew.getYearOfBirth(), formatter).atStartOfDay();
